@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Timeline from './components/Timeline';
 import DirectoryTree from './components/DirectoryTree';
-import DiffViewer from './components/DiffViewer';
+import AutoPlayDiffViewer from './components/AutoPlayDiffViewer';
 import CommitGraph from './components/CommitGraph';
 import ConversationHistory from './components/ConversationHistory';
 import PlaybackControls from './components/PlaybackControls';
@@ -50,9 +50,9 @@ function App() {
               </div>
 
               <div className="center-panel">
-                <DiffViewer 
-                  selectedFile={selectedFile}
-                  selectedCommit={selectedCommit}
+                <AutoPlayDiffViewer 
+                  currentTime={currentTime}
+                  isPlaying={isPlaying}
                 />
               </div>
 

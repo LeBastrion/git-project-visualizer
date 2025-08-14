@@ -89,11 +89,12 @@ const PlaybackControls = ({
         <div className="speed-controls">
           <label>Speed:</label>
           <select value={speed} onChange={(e) => onSpeedChange(Number(e.target.value))}>
+            <option value={0.25}>0.25x (Slow)</option>
             <option value={0.5}>0.5x</option>
-            <option value={1}>1x</option>
-            <option value={2}>2x</option>
-            <option value={5}>5x</option>
-            <option value={10}>10x</option>
+            <option value={1}>1x (Normal)</option>
+            <option value={2}>2x (Fast)</option>
+            <option value={5}>5x (Demo)</option>
+            <option value={10}>10x (Quick)</option>
           </select>
         </div>
         

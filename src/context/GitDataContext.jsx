@@ -97,7 +97,7 @@ export const GitDataProvider = ({ children }) => {
   const fetchDiff = async (commit, filepath) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/diff/${commit}/${encodeURIComponent(filepath)}`
+        `http://localhost:3001/api/diff/${commit}/${filepath}`
       );
       return response.data;
     } catch (err) {
@@ -109,7 +109,7 @@ export const GitDataProvider = ({ children }) => {
   const fetchFileContent = async (commit, filepath) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/file-content/${commit}/${encodeURIComponent(filepath)}`
+        `http://localhost:3001/api/file-content/${commit}/${filepath}`
       );
       return response.data;
     } catch (err) {

@@ -52,7 +52,7 @@ app.get('/api/commits/:branch', async (req, res) => {
     await git.checkout(branch);
     
     const log = await git.log(['--all', '--decorate', '--oneline', '--graph']);
-    const detailedLog = await git.log(['--stat', '--name-status']);
+    const detailedLog = await git.log(['--name-status']);
     
     const commits = detailedLog.all.map(commit => ({
       hash: commit.hash,
@@ -85,11 +85,12 @@ app.get('/api/file-history/:filepath', async (req, res) => {
   }
 });
 
-app.get('/api/diff/:commit/:filepath', async (req, res) => {
+app.get('/api/diff/:commit/*', async (req, res) => {
   if (!git) return res.status(400).json({ error: 'No repository set' });
   
   try {
-    const { commit, filepath } = req.params;
+    const { commit } = req.params;
+    const filepath = req.params[0];
     const diff = await git.diff([`${commit}~1`, commit, '--', filepath]);
     res.json({ diff });
   } catch (error) {
