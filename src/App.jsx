@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Timeline from './components/Timeline';
-import DirectoryTree from './components/DirectoryTree';
-import AutoPlayDiffViewer from './components/AutoPlayDiffViewer';
+import AnimatedDirectoryTree from './components/AnimatedDirectoryTree';
+import CinematicPlayback from './components/CinematicPlayback';
 import CommitGraph from './components/CommitGraph';
 import ConversationHistory from './components/ConversationHistory';
 import PlaybackControls from './components/PlaybackControls';
@@ -17,6 +17,7 @@ function App() {
   const [currentTime, setCurrentTime] = useState(0);
   const [selectedCommit, setSelectedCommit] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [currentOperation, setCurrentOperation] = useState(null);
 
   return (
     <GitDataProvider>
@@ -42,17 +43,16 @@ function App() {
 
             <div className="main-content">
               <div className="left-panel">
-                <DirectoryTree 
-                  branch={selectedBranch}
-                  currentTime={currentTime}
-                  onFileSelect={setSelectedFile}
+                <AnimatedDirectoryTree 
+                  currentOperation={currentOperation}
                 />
               </div>
 
               <div className="center-panel">
-                <AutoPlayDiffViewer 
-                  currentTime={currentTime}
+                <CinematicPlayback 
                   isPlaying={isPlaying}
+                  speed={playbackSpeed}
+                  onStepChange={setCurrentOperation}
                 />
               </div>
 
