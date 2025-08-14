@@ -16,14 +16,22 @@ const MinimalRepoSelector = ({ onRepoSelect, onBranchSelect }) => {
       if (result.success) {
         onRepoSelect(repoPath);
         const branchData = await fetchBranches();
+        console.log('Branches fetched:', branchData);
         if (branchData.current) {
           setSelectedBranch(branchData.current);
           onBranchSelect(branchData.current);
+          setIsConfigured(true);
+        } else if (branchData.all && branchData.all.length > 0) {
+          // If no current branch, select first available
+          const firstBranch = branchData.all[0];
+          setSelectedBranch(firstBranch);
+          onBranchSelect(firstBranch);
           setIsConfigured(true);
         }
       }
     } catch (err) {
       console.error('Failed to set repository:', err);
+      alert('Failed to set repository. Check the path and try again.');
     }
   };
 

@@ -51,7 +51,7 @@
 .repo-input {
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding: var(--space-xs) 0;
   font-family: var(--font-mono);
   font-size: 0.85rem;

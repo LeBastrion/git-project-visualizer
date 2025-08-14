@@ -1,17 +1,17 @@
 /* Japanese Minimalist Design System */
 
 :root {
-  /* Minimal color palette - inspired by sumi ink and paper */
-  --ink: #1a1a1a;
-  --ink-light: #666666;
-  --ink-faint: #999999;
-  --paper: #ffffff;
-  --paper-warm: #fafaf8;
-  --accent-subtle: #0066cc;
-  --accent-muted: rgba(0, 102, 204, 0.1);
-  --create: #00aa44;
-  --modify: #ff8800;
-  --delete: #cc3333;
+  /* Dark mode - minimal palette */
+  --ink: #e8e8e8;
+  --ink-light: #a0a0a0;
+  --ink-faint: #606060;
+  --paper: #0a0a0a;
+  --paper-warm: #111111;
+  --accent-subtle: #4a9eff;
+  --accent-muted: rgba(74, 158, 255, 0.1);
+  --create: #4eff9f;
+  --modify: #ffaa44;
+  --delete: #ff6666;
   
   /* Typography - clean, readable, elegant */
   --font-primary: -apple-system, 'SF Pro Text', 'Helvetica Neue', 'Hiragino Sans', sans-serif;
@@ -60,7 +60,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: var(--space-md) var(--space-xl);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .app-header h1 {
@@ -87,17 +87,17 @@ body {
 }
 
 .left-panel {
-  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .right-panel {
-  border-left: 1px solid rgba(0, 0, 0, 0.05);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Timeline - Minimal */
 .timeline-container {
   height: 60px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   background: var(--paper-warm);
 }
 
@@ -115,7 +115,7 @@ h1, h2, h3 {
 /* Buttons - Minimal */
 button {
   background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: var(--space-xs) var(--space-sm);
   font-family: inherit;
   font-size: 0.85rem;
@@ -137,7 +137,7 @@ button:active {
 select {
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding: var(--space-xs) 0;
   font-family: inherit;
   font-size: 0.85rem;
@@ -156,7 +156,7 @@ select:focus {
 input[type="text"] {
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding: var(--space-xs) 0;
   font-family: inherit;
   font-size: 0.85rem;

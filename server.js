@@ -157,10 +157,14 @@ app.get('/api/file-content/:commit/*', async (req, res) => {
   try {
     const { commit } = req.params;
     const filepath = req.params[0];
-    const content = await git.show([`${commit}:${filepath}`]);
-    res.json({ content });
+    
+    // Handle files with or without extensions
+    const content = await git.raw(['show', `${commit}:${filepath}`]);
+    res.json({ content: content || '' });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error(`Error fetching file ${filepath} at commit ${commit}:`, error.message);
+    // Return empty content for missing files instead of error
+    res.json({ content: '' });
   }
 });
 
