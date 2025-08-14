@@ -1,0 +1,144 @@
+.diff-viewer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+}
+
+.diff-viewer.empty,
+.diff-viewer.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+.diff-controls {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.diff-controls button {
+  padding: 0.5rem 1rem;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.diff-controls button:hover {
+  background: #3a3a3a;
+}
+
+.diff-controls button.active {
+  background: var(--accent-blue);
+  color: white;
+  border-color: var(--accent-blue);
+}
+
+.diff-split-view {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.diff-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.diff-pane.diff-old {
+  border-right: 1px solid var(--border-color);
+}
+
+.diff-header {
+  padding: 0.75rem 1rem;
+  background: var(--bg-tertiary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.diff-content {
+  flex: 1;
+  overflow: auto;
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.diff-line {
+  display: flex;
+  min-height: 1.5rem;
+}
+
+.line-number {
+  width: 50px;
+  padding: 0 0.5rem;
+  text-align: right;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+  user-select: none;
+}
+
+.line-marker {
+  width: 20px;
+  text-align: center;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+}
+
+.line-content {
+  flex: 1;
+  padding: 0 1rem;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.diff-deletion {
+  background: rgba(255, 68, 68, 0.1);
+}
+
+.diff-deletion .line-content {
+  color: #ff6b6b;
+}
+
+.diff-addition {
+  background: rgba(78, 255, 159, 0.1);
+}
+
+.diff-addition .line-content {
+  color: #4eff9f;
+}
+
+.diff-unchanged {
+  color: var(--text-secondary);
+}
+
+.diff-empty {
+  background: var(--bg-secondary);
+}
+
+.diff-unified-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.diff-unified-view .line-number.old {
+  width: 40px;
+}
+
+.diff-unified-view .line-number.new {
+  width: 40px;
+  border-right: 1px solid var(--border-color);
+}

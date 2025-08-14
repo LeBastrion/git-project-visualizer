@@ -1,0 +1,97 @@
+.directory-tree {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.tree-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tree-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.branch-name {
+  font-size: 0.875rem;
+  color: var(--accent-blue);
+  background: var(--bg-tertiary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.tree-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.tree-node {
+  user-select: none;
+}
+
+.tree-item {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.tree-item:hover {
+  background: var(--bg-tertiary);
+}
+
+.tree-item.directory {
+  font-weight: 500;
+}
+
+.tree-item.file {
+  color: var(--text-secondary);
+}
+
+.tree-item.file-modified {
+  color: var(--accent-yellow);
+}
+
+.tree-item.file-added {
+  color: var(--accent-green);
+}
+
+.tree-icon {
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+
+.tree-name {
+  flex: 1;
+  font-size: 0.875rem;
+}
+
+.change-indicator {
+  margin-left: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.tree-children {
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
