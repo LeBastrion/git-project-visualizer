@@ -1,0 +1,110 @@
+.minimal-directory-tree {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+}
+
+.tree-header {
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.tree-title {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+}
+
+.tree-count {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink-faint);
+  background: var(--accent-muted);
+  padding: 0 var(--space-xs);
+  border-radius: 10px;
+}
+
+.tree-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-md) 0;
+}
+
+/* Hide scrollbar */
+.tree-content {
+  scrollbar-width: none;
+}
+
+.tree-content::-webkit-scrollbar {
+  display: none;
+}
+
+.tree-node {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink-light);
+}
+
+.node-line {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 0.2rem var(--space-lg);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.node-line.highlighted {
+  color: var(--ink);
+  background: var(--paper-warm);
+  animation: highlightPulse 1s ease;
+}
+
+.node-line.recent {
+  color: var(--ink);
+}
+
+@keyframes highlightPulse {
+  0% {
+    background: var(--paper);
+  }
+  50% {
+    background: var(--accent-muted);
+  }
+  100% {
+    background: var(--paper-warm);
+  }
+}
+
+.node-prefix {
+  font-weight: 300;
+  color: var(--ink-faint);
+  width: 0.8rem;
+  text-align: center;
+}
+
+.node-name {
+  letter-spacing: 0.02em;
+}
+
+.node-children {
+  animation: expandIn 0.2s ease;
+  transform-origin: top;
+}
+
+@keyframes expandIn {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 100vh;
+  }
+}

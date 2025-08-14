@@ -1,0 +1,209 @@
+/* Japanese Minimalist Design System */
+
+:root {
+  /* Minimal color palette - inspired by sumi ink and paper */
+  --ink: #1a1a1a;
+  --ink-light: #666666;
+  --ink-faint: #999999;
+  --paper: #ffffff;
+  --paper-warm: #fafaf8;
+  --accent-subtle: #0066cc;
+  --accent-muted: rgba(0, 102, 204, 0.1);
+  --create: #00aa44;
+  --modify: #ff8800;
+  --delete: #cc3333;
+  
+  /* Typography - clean, readable, elegant */
+  --font-primary: -apple-system, 'SF Pro Text', 'Helvetica Neue', 'Hiragino Sans', sans-serif;
+  --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+  
+  /* Spacing - based on 8px grid */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove all scrollbars for cleaner look */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Main App Layout */
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--paper);
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-xl);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.app-header h1 {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+}
+
+/* Main Content Grid */
+.main-content {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 0;
+  overflow: hidden;
+}
+
+.left-panel,
+.center-panel,
+.right-panel {
+  overflow: hidden;
+  background: transparent;
+}
+
+.left-panel {
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.right-panel {
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Timeline - Minimal */
+.timeline-container {
+  height: 60px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: var(--paper-warm);
+}
+
+/* Bottom Panel - Hidden by default for minimalism */
+.bottom-panel {
+  display: none;
+}
+
+/* Typography */
+h1, h2, h3 {
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* Buttons - Minimal */
+button {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: var(--space-xs) var(--space-sm);
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 2px;
+}
+
+button:hover {
+  border-color: var(--ink);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+/* Select - Minimal */
+select {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: var(--space-xs) 0;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+select:hover,
+select:focus {
+  border-color: var(--ink);
+  outline: none;
+}
+
+/* Input - Minimal */
+input[type="text"] {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: var(--space-xs) 0;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--ink);
+  transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+
+/* Subtle animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Utility classes */
+.subtle {
+  color: var(--ink-light);
+}
+
+.faint {
+  color: var(--ink-faint);
+}
+
+.small {
+  font-size: 0.85rem;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}

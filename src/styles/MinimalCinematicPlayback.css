@@ -1,0 +1,174 @@
+.minimal-playback {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  position: relative;
+}
+
+.minimal-playback.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-style: italic;
+}
+
+.playback-meta {
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.file-path {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.operation-type {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 300;
+  width: 1rem;
+}
+
+.operation-type.create {
+  color: var(--create);
+}
+
+.operation-type.modify {
+  color: var(--modify);
+}
+
+.path-text {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+
+.commit-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: var(--space-xs);
+}
+
+.commit-message {
+  font-size: 0.8rem;
+  color: var(--ink-light);
+  font-style: italic;
+}
+
+.commit-stats {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+}
+
+.additions {
+  color: var(--create);
+}
+
+.deletions {
+  color: var(--delete);
+}
+
+.content-area {
+  flex: 1;
+  display: flex;
+  overflow: auto;
+  scroll-behavior: smooth;
+  padding: var(--space-md) 0;
+}
+
+/* Hide scrollbar for cleaner look */
+.content-area {
+  scrollbar-width: none;
+}
+
+.content-area::-webkit-scrollbar {
+  display: none;
+}
+
+.line-numbers {
+  padding: 0 var(--space-md);
+  text-align: right;
+  user-select: none;
+}
+
+.line-number {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+  height: 1.6rem;
+  line-height: 1.6rem;
+  opacity: 0;
+  animation: fadeInNumber 0.3s ease forwards;
+}
+
+@keyframes fadeInNumber {
+  to {
+    opacity: 1;
+  }
+}
+
+.file-content {
+  flex: 1;
+  padding: 0 var(--space-lg) 0 var(--space-sm);
+}
+
+.code-line {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink);
+  height: 1.6rem;
+  line-height: 1.6rem;
+  white-space: pre;
+  opacity: 0;
+  animation: fadeInLine 0.4s ease forwards;
+  animation-delay: 0.02s;
+}
+
+@keyframes fadeInLine {
+  from {
+    opacity: 0;
+    transform: translateX(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.progress-indicator {
+  position: absolute;
+  bottom: var(--space-md);
+  right: var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.step-count {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.05em;
+}
+
+.progress-line {
+  width: 100px;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: var(--ink);
+  transition: width 0.5s ease;
+}

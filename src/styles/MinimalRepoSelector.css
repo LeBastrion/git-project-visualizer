@@ -1,0 +1,85 @@
+.minimal-repo-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.minimal-repo-selector.configured {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink-light);
+}
+
+.repo-name {
+  color: var(--ink);
+}
+
+.separator {
+  color: var(--ink-faint);
+  margin: 0 0.25rem;
+}
+
+.branch-select {
+  background: transparent;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.branch-select:focus {
+  outline: none;
+}
+
+.change-btn {
+  background: transparent;
+  border: none;
+  color: var(--ink-faint);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 var(--space-xs);
+  transition: color 0.2s ease;
+}
+
+.change-btn:hover {
+  color: var(--ink);
+}
+
+.repo-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: var(--space-xs) 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink);
+  width: 300px;
+  transition: border-color 0.2s ease;
+}
+
+.repo-input:focus {
+  outline: none;
+  border-color: var(--ink-light);
+}
+
+.repo-input::placeholder {
+  color: var(--ink-faint);
+}
+
+.set-btn {
+  background: transparent;
+  border: none;
+  color: var(--ink-light);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0 var(--space-xs);
+  transition: all 0.2s ease;
+}
+
+.set-btn:hover {
+  color: var(--ink);
+  transform: translateX(2px);
+}
