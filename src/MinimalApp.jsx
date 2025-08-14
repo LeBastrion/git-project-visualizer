@@ -40,10 +40,6 @@ function MinimalApp() {
                   onStepChange={setCurrentOperation}
                 />
               </div>
-
-              <div className="right-panel">
-                {/* Intentionally empty for now - pure minimalism */}
-              </div>
             </div>
 
             <MinimalPlaybackControls 
