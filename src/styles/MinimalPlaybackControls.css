@@ -1,40 +1,28 @@
 .minimal-playback-controls {
   position: fixed;
-  top: var(--space-md);
-  right: var(--space-md);
+  top: 2rem;
+  right: 2rem;
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-xs) var(--space-sm);
-  background: rgba(10, 10, 10, 0.8);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
+  gap: 1.5rem;
   z-index: 100;
 }
 
 .play-control {
   background: transparent;
-  border: none;
-  font-size: 0.8rem;
-  color: var(--ink);
+  border: 1px solid #303030;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: #808080;
   cursor: pointer;
-  padding: var(--space-xs);
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
+  padding: 0.5rem 1rem;
   transition: all 0.2s ease;
+  font-weight: 400;
 }
 
 .play-control:hover {
-  background: var(--paper-warm);
-}
-
-.play-control:active {
-  transform: scale(0.95);
+  border-color: #606060;
+  color: #c0c0c0;
 }
 
 .speed-control {
@@ -44,22 +32,26 @@
 }
 
 .speed-label {
-  font-size: 0.75rem;
-  color: var(--ink-faint);
-  text-transform: lowercase;
-  letter-spacing: 0.05em;
+  font-size: 0.65rem;
+  color: #505050;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-right: 0.5rem;
 }
 
 .speed-select {
   background: transparent;
   border: none;
+  border-bottom: 1px solid #303030;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--ink);
+  font-size: 0.7rem;
+  color: #808080;
   cursor: pointer;
-  padding: 0;
+  padding: 0.25rem 0;
 }
 
 .speed-select:focus {
   outline: none;
+  border-color: #606060;
+  color: #c0c0c0;
 }

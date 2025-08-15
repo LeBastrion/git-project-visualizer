@@ -14,7 +14,7 @@ const MinimalPlaybackControls = ({
         onClick={onPlayPause}
         aria-label={isPlaying ? 'Pause' : 'Play'}
       >
-        {isPlaying ? '||' : '▶'}
+        {isPlaying ? 'PAUSE' : 'PLAY'}
       </button>
       
       <div className="speed-control">

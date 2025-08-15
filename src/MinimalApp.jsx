@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MinimalDirectoryTree from './components/MinimalDirectoryTree';
-import EpicProcessVisualizer from './components/EpicProcessVisualizer';
+import ZenProcessVisualizer from './components/ZenProcessVisualizer';
 import MinimalPlaybackControls from './components/MinimalPlaybackControls';
 import MinimalRepoSelector from './components/MinimalRepoSelector';
 import { GitDataProvider, useGitData } from './context/GitDataContext';
@@ -41,7 +41,7 @@ function MinimalAppContent() {
             </div>
 
             <div className="center-panel">
-              <EpicProcessVisualizer 
+              <ZenProcessVisualizer 
                 isPlaying={isPlaying}
                 speed={playbackSpeed}
                 onStepChange={setCurrentOperation}
