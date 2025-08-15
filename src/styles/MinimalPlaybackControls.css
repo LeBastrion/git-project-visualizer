@@ -1,17 +1,16 @@
 .minimal-playback-controls {
   position: fixed;
-  bottom: var(--space-lg);
-  left: 50%;
-  transform: translateX(-50%);
+  top: var(--space-md);
+  right: var(--space-md);
   display: flex;
   align-items: center;
-  gap: var(--space-md);
-  padding: var(--space-sm) var(--space-md);
-  background: var(--paper);
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-sm);
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
+  border-radius: 20px;
   z-index: 100;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .play-control {

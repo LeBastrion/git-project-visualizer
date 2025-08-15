@@ -154,10 +154,10 @@ app.get('/api/conversations', async (req, res) => {
 app.get('/api/file-content/:commit/*', async (req, res) => {
   if (!git) return res.status(400).json({ error: 'No repository set' });
   
+  const { commit } = req.params;
+  const filepath = req.params[0];
+  
   try {
-    const { commit } = req.params;
-    const filepath = req.params[0];
-    
     // Handle files with or without extensions
     const content = await git.raw(['show', `${commit}:${filepath}`]);
     res.json({ content: content || '' });

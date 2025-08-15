@@ -1,0 +1,315 @@
+.process-visualizer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  position: relative;
+}
+
+.process-visualizer.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-state {
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  color: var(--ink-faint);
+  margin-bottom: 1rem;
+}
+
+.empty-text {
+  color: var(--ink-light);
+  font-size: 0.9rem;
+}
+
+.visualizer-content {
+  flex: 1;
+  overflow: auto;
+  padding: var(--space-xl);
+}
+
+/* Overview Display */
+.overview-display {
+  animation: fadeIn 0.5s ease;
+}
+
+.commit-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.commit-number {
+  font-size: 0.8rem;
+  color: var(--accent-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-sm);
+}
+
+.commit-message {
+  font-size: 1.5rem;
+  color: var(--ink);
+  font-weight: 300;
+  margin-bottom: var(--space-xs);
+  line-height: 1.4;
+}
+
+.commit-author {
+  font-size: 0.85rem;
+  color: var(--ink-light);
+  font-style: italic;
+}
+
+.files-summary {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.summary-title {
+  font-size: 0.85rem;
+  color: var(--ink-light);
+  margin-bottom: var(--space-md);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.file-summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  margin-bottom: var(--space-xs);
+  background: var(--paper-warm);
+  border-radius: 4px;
+  animation: slideIn 0.3s ease;
+}
+
+.file-icon {
+  font-size: 1.2rem;
+}
+
+.file-icon.new {
+  color: var(--create);
+}
+
+.file-icon.modified {
+  color: var(--modify);
+}
+
+.file-path {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink);
+}
+
+.file-stats {
+  display: flex;
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.additions {
+  color: var(--create);
+}
+
+.deletions {
+  color: var(--delete);
+}
+
+/* Creation Display */
+.creation-display {
+  animation: fadeIn 0.5s ease;
+}
+
+.creation-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.action-icon {
+  font-size: 1.5rem;
+}
+
+.action-text {
+  font-size: 1.1rem;
+  color: var(--ink);
+  font-weight: 300;
+}
+
+.content-preview {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background: var(--paper-warm);
+  border-radius: 8px;
+  padding: var(--space-md);
+  overflow: hidden;
+}
+
+.code-line {
+  display: flex;
+  gap: var(--space-sm);
+  min-height: 1.4rem;
+  animation: typeIn 0.05s ease;
+}
+
+.code-line.new {
+  color: var(--create);
+}
+
+.line-number {
+  width: 3rem;
+  text-align: right;
+  color: var(--ink-faint);
+  user-select: none;
+}
+
+.line-content {
+  flex: 1;
+  white-space: pre;
+  color: var(--ink);
+}
+
+.more-indicator {
+  margin-top: var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--ink-faint);
+  font-style: italic;
+  text-align: center;
+}
+
+/* Modification Display */
+.modification-display {
+  animation: fadeIn 0.5s ease;
+}
+
+.diff-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.diff-container {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.diff-hunk {
+  margin-bottom: var(--space-lg);
+  background: var(--paper-warm);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.hunk-header {
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(74, 158, 255, 0.1);
+  color: var(--accent-subtle);
+  font-size: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.diff-line {
+  display: flex;
+  gap: var(--space-sm);
+  padding: 0.25rem var(--space-md);
+  min-height: 1.4rem;
+  animation: slideIn 0.2s ease;
+}
+
+.diff-line.add {
+  background: rgba(78, 255, 159, 0.05);
+  color: var(--create);
+}
+
+.diff-line.remove {
+  background: rgba(255, 102, 102, 0.05);
+  color: var(--delete);
+  opacity: 0.7;
+}
+
+.diff-line.context {
+  color: var(--ink-light);
+}
+
+.diff-marker {
+  width: 1rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.diff-content {
+  flex: 1;
+  white-space: pre;
+}
+
+/* Progress Bar */
+.progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-subtle), var(--create));
+  transition: width 0.5s ease;
+}
+
+.progress-text {
+  position: absolute;
+  bottom: var(--space-sm);
+  right: var(--space-md);
+  font-size: 0.7rem;
+  color: var(--ink-faint);
+  font-family: var(--font-mono);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes typeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
