@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useGitData } from '../context/GitDataContext';
 import '../styles/ZenProcessVisualizer.css';
 
-const ZenProcessVisualizer = ({ isPlaying, speed, onStepChange }) => {
+const ZenProcessVisualizer = ({ isPlaying, speed, onStepChange, onComplete }) => {
   const { commits, fetchFileContent, fetchDiff } = useGitData();
   const [currentStep, setCurrentStep] = useState(0);
   const [fileOperations, setFileOperations] = useState([]);
@@ -13,13 +13,17 @@ const ZenProcessVisualizer = ({ isPlaying, speed, onStepChange }) => {
   const [afterContent, setAfterContent] = useState([]);
   const [visibleContentLines, setVisibleContentLines] = useState(0);
   const [currentFileIndex, setCurrentFileIndex] = useState(0);
+  const [isComplete, setIsComplete] = useState(false);
   const animationRef = useRef(null);
 
   useEffect(() => {
     if (commits.length === 0) return;
     
+    // Reverse commits to play chronologically (oldest first)
+    const chronologicalCommits = [...commits].reverse();
+    
     const operations = [];
-    commits.forEach((commit, idx) => {
+    chronologicalCommits.forEach((commit, idx) => {
       if (commit.files && commit.files.length > 0) {
         operations.push({
           type: 'commit',
@@ -35,10 +39,20 @@ const ZenProcessVisualizer = ({ isPlaying, speed, onStepChange }) => {
 
   useEffect(() => {
     if (!isPlaying || fileOperations.length === 0) return;
+    
+    // Reset completion state when starting playback
+    if (isComplete && currentStep >= fileOperations.length) {
+      setCurrentStep(0);
+      setIsComplete(false);
+      setDisplayMode('overview');
+    }
 
     const processStep = async () => {
       if (currentStep >= fileOperations.length) {
-        setCurrentStep(0);
+        // Stop playback at the end instead of looping
+        setIsComplete(true);
+        setDisplayMode('complete');
+        if (onComplete) onComplete();
         return;
       }
 
@@ -55,7 +69,19 @@ const ZenProcessVisualizer = ({ isPlaying, speed, onStepChange }) => {
       // Process each file
       for (let i = 0; i < operation.files.length; i++) {
         setCurrentFileIndex(i);
-        await displayFileChange(operation.commit, operation.files[i]);
+        const currentFile = operation.files[i];
+        
+        // Update the operation with current file info for directory tree
+        if (onStepChange) {
+          onStepChange({
+            ...operation,
+            path: currentFile.file,
+            type: (currentFile.deletions === 0 && currentFile.insertions > 0) ? 'create' : 'modify',
+            files: operation.files
+          });
+        }
+        
+        await displayFileChange(operation.commit, currentFile);
         await new Promise(resolve => setTimeout(resolve, 4000 / speed));
       }
 
@@ -261,7 +287,52 @@ const ZenProcessVisualizer = ({ isPlaying, speed, onStepChange }) => {
     );
   };
 
-  if (!currentOperation) {
+  const renderComplete = () => {
+    // Calculate actual statistics
+    const totalFiles = new Set();
+    let createdCount = 0;
+    let modifiedCount = 0;
+    
+    fileOperations.forEach(op => {
+      op.files.forEach(file => {
+        const filepath = file.file || file.path;
+        if (!totalFiles.has(filepath)) {
+          // First time seeing this file - it's being created
+          createdCount++;
+          totalFiles.add(filepath);
+        } else {
+          // File already exists - it's being modified
+          modifiedCount++;
+        }
+      });
+    });
+    
+    return (
+      <div className="zen-complete">
+        <div className="complete-indicator">COMPLETE</div>
+        <div className="complete-stats">
+          <div className="stat-line">
+            <span className="stat-label">COMMITS PROCESSED</span>
+            <span className="stat-value">{fileOperations.length}</span>
+          </div>
+          <div className="stat-line">
+            <span className="stat-label">FILES CREATED</span>
+            <span className="stat-value">{createdCount}</span>
+          </div>
+          <div className="stat-line">
+            <span className="stat-label">FILES MODIFIED</span>
+            <span className="stat-value">{modifiedCount}</span>
+          </div>
+          <div className="stat-line">
+            <span className="stat-label">TOTAL OPERATIONS</span>
+            <span className="stat-value">{createdCount + modifiedCount}</span>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  if (!currentOperation && !isComplete) {
     return (
       <div className="zen-visualizer empty">
         <div className="empty-message">READY</div>
@@ -275,6 +346,7 @@ const ZenProcessVisualizer = ({ isPlaying, speed, onStepChange }) => {
         {displayMode === 'overview' && renderOverview()}
         {displayMode === 'creating' && renderCreation()}
         {displayMode === 'modifying' && renderModification()}
+        {displayMode === 'complete' && renderComplete()}
       </div>
       
       <div className="progress-track">

@@ -1,0 +1,345 @@
+/* Ghost Directory Tree - Machine consciousness aesthetic */
+
+.ghost-directory-tree {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #000000;
+  font-family: var(--font-mono);
+  position: relative;
+  overflow: visible;
+  width: max-content;
+  min-width: 350px;
+}
+
+.tree-header {
+  padding: 1.5rem 1rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.tree-title {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: #606060;
+  font-weight: 400;
+}
+
+.tree-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: #40c040;
+  animation: statusPulse 1.5s ease infinite;
+}
+
+.status-indicator {
+  width: 4px;
+  height: 4px;
+  background: #40c040;
+  animation: indicatorBlink 1s ease infinite;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes indicatorBlink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+.tree-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: visible;
+  padding: 1rem 2rem 1rem 0;
+  width: max-content;
+  min-width: 100%;
+  
+  /* Subtle scan lines effect */
+  position: relative;
+}
+
+.tree-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(64, 192, 64, 0.1) 50%, 
+    transparent 100%
+  );
+  animation: scanLine 8s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scanLine {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100vh); }
+}
+
+/* Scrollbar styling */
+.tree-content::-webkit-scrollbar {
+  width: 1px;
+}
+
+.tree-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tree-content::-webkit-scrollbar-thumb {
+  background: #303030;
+}
+
+/* Node styling */
+.tree-node {
+  position: relative;
+}
+
+.node-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.25rem 2rem 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  color: #606060;
+  transition: all 0.2s ease;
+  position: relative;
+  white-space: nowrap;
+  width: max-content;
+}
+
+.node-line.directory {
+  color: #808080;
+}
+
+.node-line.scanning {
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(128, 128, 128, 0.05) 50%, 
+    transparent 100%
+  );
+  animation: scanPulse 0.5s ease;
+}
+
+@keyframes scanPulse {
+  0% { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.node-line.active {
+  color: #ffffff;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.02) 100%
+  );
+}
+
+.node-line.creating {
+  color: #40c040;
+  animation: createFadeIn 0.6s ease;
+}
+
+@keyframes createFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.node-line.modifying {
+  color: #c0c040;
+}
+
+.node-line.pulsing {
+  animation: pulse 1s ease;
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.node-indicator {
+  width: 0.8rem;
+  font-weight: 300;
+  color: #404040;
+  display: inline-block;
+}
+
+.node-line.creating .node-indicator {
+  color: #40c040;
+  animation: indicatorRotate 0.6s ease;
+}
+
+.node-line.modifying .node-indicator {
+  color: #c0c040;
+  animation: indicatorFlash 0.3s ease 2;
+}
+
+@keyframes indicatorRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(90deg); }
+}
+
+@keyframes indicatorFlash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+.node-name {
+  letter-spacing: 0.02em;
+  position: relative;
+}
+
+.ghost-cursor {
+  display: inline-block;
+  width: 0.5rem;
+  margin-left: 2px;
+  animation: cursorBlink 1s ease infinite;
+  color: #40c040;
+  font-weight: 400;
+}
+
+@keyframes cursorBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.operation-tag {
+  margin-left: 1rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid;
+  animation: tagAppear 0.3s ease;
+  flex-shrink: 0;
+}
+
+.node-line.creating .operation-tag {
+  color: #40c040;
+  border-color: #40c040;
+  background: rgba(64, 192, 64, 0.05);
+}
+
+.node-line.modifying .operation-tag {
+  color: #c0c040;
+  border-color: #c0c040;
+  background: rgba(192, 192, 64, 0.05);
+}
+
+@keyframes tagAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.node-children {
+  animation: expandChildren 0.2s ease;
+  transform-origin: top;
+}
+
+@keyframes expandChildren {
+  0% {
+    opacity: 0;
+    max-height: 0;
+  }
+  100% {
+    opacity: 1;
+    max-height: none;
+  }
+}
+
+/* Ghost terminal at bottom */
+.ghost-terminal {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(0deg, 
+    rgba(0, 0, 0, 0.95) 0%, 
+    transparent 100%
+  );
+  border-top: 1px solid #1a1a1a;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  animation: terminalSlideUp 0.3s ease;
+}
+
+@keyframes terminalSlideUp {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.terminal-prompt {
+  color: #40c040;
+  animation: promptPulse 1s ease infinite;
+}
+
+@keyframes promptPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.terminal-text {
+  color: #808080;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+/* Matrix rain effect (subtle) */
+.ghost-directory-tree::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(0deg, 
+    transparent 0%, 
+    rgba(64, 192, 64, 0.01) 50%, 
+    transparent 100%
+  );
+  animation: matrixRain 20s linear infinite;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+@keyframes matrixRain {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}

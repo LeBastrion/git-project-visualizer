@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import MinimalDirectoryTree from './components/MinimalDirectoryTree';
+import GhostDirectoryTree from './components/GhostDirectoryTree';
 import ZenProcessVisualizer from './components/ZenProcessVisualizer';
 import MinimalPlaybackControls from './components/MinimalPlaybackControls';
 import MinimalRepoSelector from './components/MinimalRepoSelector';
@@ -35,7 +35,7 @@ function MinimalAppContent() {
         <>
           <div className="main-content">
             <div className="left-panel">
-              <MinimalDirectoryTree 
+              <GhostDirectoryTree 
                 currentOperation={currentOperation}
               />
             </div>
@@ -45,6 +45,7 @@ function MinimalAppContent() {
                 isPlaying={isPlaying}
                 speed={playbackSpeed}
                 onStepChange={setCurrentOperation}
+                onComplete={() => setIsPlaying(false)}
               />
             </div>
           </div>
