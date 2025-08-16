@@ -210,13 +210,25 @@ app.get('/api/file-content/:commit/*', async (req, res) => {
   const filepath = req.params[0];
   
   try {
-    // Handle files with or without extensions
+    // Use git show to get file content at specific commit
     const content = await git.raw(['show', `${commit}:${filepath}`]);
+    
+    // Log for debugging
+    console.log(`Fetched content for ${filepath} at ${commit}, length: ${content ? content.length : 0}`);
+    
     res.json({ content: content || '' });
   } catch (error) {
     console.error(`Error fetching file ${filepath} at commit ${commit}:`, error.message);
-    // Return empty content for missing files instead of error
-    res.json({ content: '' });
+    
+    // Try alternative method if first fails
+    try {
+      const altContent = await git.show([`${commit}:${filepath}`]);
+      console.log(`Alternative fetch for ${filepath} succeeded`);
+      res.json({ content: altContent || '' });
+    } catch (altError) {
+      console.error(`Alternative fetch also failed:`, altError.message);
+      res.json({ content: '' });
+    }
   }
 });
 

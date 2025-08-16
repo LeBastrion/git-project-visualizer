@@ -164,3 +164,74 @@ git.raw(['log', '--pretty=format:%H|%an|%ae|%ad|%s', '--name-status', '--date=is
 - Test server parsing with actual repository
 - Verify file operations detection (A, D, M, R status codes)
 - Ensure proper restart mechanism for server
+
+### Entry 12 - August 15, 2025 - File Content Display Implementation Plan
+
+#### CRITICAL FIX NEEDED: Display Actual File Contents
+
+**Problem**: BrutalistCodeCanvas shows empty viewport instead of actual file contents
+
+**Root Cause**: fetchFileContent not returning actual data from repository
+
+#### Implementation Plan:
+
+##### Step 1: Fix Server Endpoint
+```javascript
+// server.js - /api/file-content/:commit/*
+app.get('/api/file-content/:commit/*', async (req, res) => {
+  const { commit } = req.params;
+  const filepath = req.params[0];
+  const content = await git.raw(['show', `${commit}:${filepath}`]);
+  res.json({ content: content || '' });
+});
+```
+
+##### Step 2: Update BrutalistCodeCanvas.jsx
+- Verify fetchFileContent returns actual content
+- Parse content into lines array
+- Display with typewriter effect for CREATE
+- Display with diff view for MODIFY
+
+##### Step 3: Content Display Rules
+- **CREATE**: Show actual file content line-by-line with typewriter effect
+- **MODIFY**: Show actual diff with +/- indicators
+- **Line limit**: First 50 lines, then "..." indicator
+- **Cursor**: Blinking underscore at current write position
+
+##### Step 4: File Type Handling
+- Markdown (.md): Display raw with structure preserved
+- JSON: Show with proper indentation
+- Code files: Display as-is, no syntax highlighting (brutalist)
+- Plain text: Direct display
+
+##### Step 5: Animation Timing
+- Typewriter: 30ms per character for first line, then 50ms per line
+- Diff reveal: 50ms per line, context first then changes
+
+##### Step 6: Error Handling
+- If fetch fails, show: [CONTENT UNAVAILABLE]
+- Fallback to file metadata
+- Log errors for debugging
+
+#### Visual Target:
+```
+CREATE
+.claude/agents/dna-curator.md
+───────────────────────────────────
+   1  # DNA Curator Agent
+   2  
+   3  ## Role
+   4  Identify and preserve narrative DNA
+   5  _
+```
+
+#### Key Files to Modify:
+1. server.js - Fix file-content endpoint
+2. BrutalistCodeCanvas.jsx - Update displayFileOperation function
+3. GitDataContext.jsx - Verify fetchFileContent method
+
+#### Success Criteria:
+- Actual file contents visible
+- Typewriter animation working
+- Diff display for modifications
+- No empty viewports

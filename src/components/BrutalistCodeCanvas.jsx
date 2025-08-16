@@ -102,7 +102,8 @@ const BrutalistCodeCanvas = ({ isPlaying, speed, onStepChange, onComplete }) => 
       if (file.insertions === 0 && file.deletions === 0) {
         setDisplayMode('creating');
         const content = await fetchFileContent(commit.hash, file.file);
-        const lines = content.split('\n');
+        console.log(`Fetched content for ${file.file}, length: ${content.length}`);
+        const lines = content ? content.split('\n') : ['[CONTENT UNAVAILABLE]'];
         setFileContent(lines);
         
         // Show content immediately for empty changes
@@ -113,7 +114,8 @@ const BrutalistCodeCanvas = ({ isPlaying, speed, onStepChange, onComplete }) => 
       if (isCreation || isFirstCommit) {
         setDisplayMode('creating');
         const content = await fetchFileContent(commit.hash, file.file);
-        const lines = content.split('\n');
+        console.log(`Creating ${file.file}, content length: ${content.length}`);
+        const lines = content ? content.split('\n') : ['[CONTENT UNAVAILABLE]'];
         setFileContent(lines);
         
         // Typewriter effect
@@ -132,7 +134,8 @@ const BrutalistCodeCanvas = ({ isPlaying, speed, onStepChange, onComplete }) => 
         if (!diff || diff === '') {
           setDisplayMode('creating');
           const content = await fetchFileContent(commit.hash, file.file);
-          const lines = content.split('\n');
+          console.log(`No diff, showing content for ${file.file}, length: ${content.length}`);
+          const lines = content ? content.split('\n') : ['[CONTENT UNAVAILABLE]'];
           setFileContent(lines);
           setVisibleLines(Math.min(lines.length, 50));
           return;
@@ -156,11 +159,13 @@ const BrutalistCodeCanvas = ({ isPlaying, speed, onStepChange, onComplete }) => 
       try {
         setDisplayMode('creating');
         const content = await fetchFileContent(commit.hash, file.file);
-        const lines = content.split('\n');
+        const lines = content ? content.split('\n') : ['[ERROR LOADING FILE]'];
         setFileContent(lines);
         setVisibleLines(Math.min(lines.length, 50));
       } catch (fallbackError) {
         console.error('Fallback also failed:', fallbackError);
+        setFileContent(['[CONTENT UNAVAILABLE]']);
+        setVisibleLines(1);
       }
     }
   };

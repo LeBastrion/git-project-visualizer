@@ -99,10 +99,11 @@ export const GitDataProvider = ({ children }) => {
       const response = await axios.get(
         `http://localhost:3001/api/diff/${commit}/${filepath}`
       );
-      return response.data;
+      return response.data.diff || '';
     } catch (err) {
+      console.error(`Error fetching diff for ${filepath}:`, err.message);
       setError(err.message);
-      throw err;
+      return '';
     }
   };
 
@@ -111,10 +112,11 @@ export const GitDataProvider = ({ children }) => {
       const response = await axios.get(
         `http://localhost:3001/api/file-content/${commit}/${filepath}`
       );
-      return response.data;
+      return response.data.content || '';
     } catch (err) {
+      console.error(`Error fetching content for ${filepath}:`, err.message);
       setError(err.message);
-      throw err;
+      return '';
     }
   };
 
