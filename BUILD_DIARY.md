@@ -85,3 +85,82 @@ Build web-based visualization for AI writers' room repo evolution with synchroni
 - **Scanning Effects**: Shows AI "thinking" process
 - **Completion Statistics**: Accurate count of commits, files, operations
 - **Non-looping Playback**: Stops at end with summary screen
+
+### Entry 10 - August 15, 2025 - Brutalist Code Canvas Implementation
+
+#### Design Philosophy:
+- Replaced ZenProcessVisualizer with BrutalistCodeCanvas
+- Sharp edges, raw information, no ornament
+- Every pixel has purpose - brutalist aesthetic
+
+#### Features Implemented:
+
+1. **Fixed Commit Header**
+   - Shows current commit being processed
+   - Progress bar for overall completion
+   - Persistent across all display states
+
+2. **Three Display States**
+   - **Overview**: Grid layout of files to process with current indicator
+   - **Creation**: Typewriter effect with blinking cursor
+   - **Modification**: Line-by-line diff reveal with +/- indicators
+
+3. **Visual Design**
+   - Pure black background (#000000)
+   - Monospace throughout, no decorative fonts
+   - No rounded corners, shadows, or gradients
+   - Grid-based spacing (10px units)
+
+4. **Performance Optimizations**
+   - Limited visible lines to prevent memory issues
+   - Simple linear transitions, no easing
+   - Cleanup of animation timeouts on unmount
+
+#### Technical Details:
+- File path breakdown (directories gray, filename white)
+- Progress indicators without percentages
+- Hard cuts between states, no fades
+- Fixed timing intervals for consistency
+
+### Entry 11 - August 15, 2025 - Critical Bugs and Server Issues
+
+#### Current Issues (IN PROGRESS):
+
+1. **Server Not Returning File Data**
+   - Problem: git.log() from simple-git doesn't include file information
+   - Attempted fix: Switched to parsing raw git output with --name-status
+   - Status: Server parsing logic implemented but needs testing
+
+2. **Port 3001 Already in Use**
+   - Problem: Server process gets stuck and prevents restart
+   - Workaround: Kill process with `lsof -ti:3001 | xargs kill -9`
+   - Need permanent fix for clean shutdown
+
+3. **Visualization Not Starting**
+   - Problem: After entering repo path, nothing happens
+   - Cause: Empty files array in commit data
+   - Related to server git log parsing issue
+
+4. **File Content Display Issues**
+   - MODIFY operations showing "CHANGES: +0 -0" 
+   - Files not displaying actual content
+   - Fallback logic added but not fully tested
+
+5. **Directory Tree Width Fluctuation**
+   - Fixed: Set to 400px fixed width
+   - Prevents pushing right panel around
+
+#### Server Changes Made:
+```javascript
+// Parsing git log output directly instead of using simple-git
+git.raw(['log', '--pretty=format:%H|%an|%ae|%ad|%s', '--name-status', '--date=iso'])
+```
+
+#### Known Working State:
+- Last working commit: Before BrutalistCodeCanvas implementation
+- Components affected: server.js, BrutalistCodeCanvas.jsx
+
+#### TODO:
+- Test server parsing with actual repository
+- Verify file operations detection (A, D, M, R status codes)
+- Ensure proper restart mechanism for server

@@ -1,0 +1,324 @@
+/* Brutalist Code Canvas - Raw Information Architecture */
+
+.brutalist-canvas {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #000000;
+  font-family: monospace;
+  position: relative;
+}
+
+.brutalist-canvas.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  color: #404040;
+}
+
+/* Fixed Header */
+.canvas-header {
+  position: sticky;
+  top: 0;
+  background: #000000;
+  border-bottom: 1px solid #303030;
+  padding: 20px;
+  z-index: 10;
+}
+
+.header-line-1 {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: #808080;
+  margin-bottom: 10px;
+}
+
+.header-line-2 {
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.header-progress {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 10px;
+  background: #1a1a1a;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #ffffff;
+  transition: width 0.3s linear;
+}
+
+.progress-text {
+  font-size: 0.7rem;
+  color: #808080;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* Content Area */
+.canvas-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px;
+}
+
+/* Overview State */
+.canvas-overview {
+  max-width: 800px;
+}
+
+.overview-title {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: #808080;
+  margin-bottom: 30px;
+}
+
+.files-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.file-row {
+  display: grid;
+  grid-template-columns: 40px 80px 1fr auto auto;
+  gap: 20px;
+  padding: 10px 0;
+  color: #808080;
+  position: relative;
+}
+
+.file-row.current {
+  color: #ffffff;
+  background: linear-gradient(to right, #1a1a1a, transparent);
+}
+
+.file-index {
+  font-size: 0.8rem;
+  color: #404040;
+}
+
+.file-operation {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+}
+
+.file-row.current .file-operation {
+  font-weight: bold;
+}
+
+.file-path {
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-stats {
+  display: flex;
+  gap: 15px;
+  font-size: 0.8rem;
+}
+
+.stat-add {
+  color: #ffffff;
+}
+
+.stat-del {
+  color: #808080;
+}
+
+.current-indicator {
+  position: absolute;
+  right: 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: #ffffff;
+}
+
+.overview-footer {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: #808080;
+  padding-top: 20px;
+  border-top: 1px solid #1a1a1a;
+}
+
+/* Creation State */
+.canvas-creation,
+.canvas-modification {
+  max-width: 900px;
+}
+
+.operation-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  color: #808080;
+  margin-bottom: 10px;
+}
+
+.operation-path {
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 20px;
+  word-break: break-all;
+}
+
+.operation-divider {
+  height: 1px;
+  background: #303030;
+  margin-bottom: 30px;
+}
+
+.code-display,
+.diff-display {
+  font-family: monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.code-line,
+.diff-line {
+  display: flex;
+  position: relative;
+}
+
+.line-number {
+  color: #404040;
+  margin-right: 20px;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.line-content {
+  color: #ffffff;
+  white-space: pre;
+  overflow-x: auto;
+  flex: 1;
+}
+
+.cursor {
+  display: inline-block;
+  animation: blink 1s infinite;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* Modification State */
+.diff-line {
+  padding: 2px 0;
+}
+
+.diff-line.add {
+  color: #ffffff;
+}
+
+.diff-line.remove {
+  color: #404040;
+}
+
+.diff-line.context {
+  color: #606060;
+}
+
+.diff-marker {
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.diff-line.add .diff-marker {
+  color: #ffffff;
+}
+
+.diff-line.remove .diff-marker {
+  color: #404040;
+}
+
+.operation-footer {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: #808080;
+  padding-top: 20px;
+  border-top: 1px solid #1a1a1a;
+}
+
+/* Complete State */
+.canvas-complete {
+  max-width: 500px;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+
+.complete-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  color: #808080;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.stats-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: #606060;
+}
+
+.stat-value {
+  font-size: 1.2rem;
+  color: #ffffff;
+  font-weight: 100;
+}
+
+/* Scrollbar */
+.canvas-content::-webkit-scrollbar {
+  width: 1px;
+}
+
+.canvas-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.canvas-content::-webkit-scrollbar-thumb {
+  background: #303030;
+}
+
+/* No rounded corners, no shadows, no gradients - pure brutalism */

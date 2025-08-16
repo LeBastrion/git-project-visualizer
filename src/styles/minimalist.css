@@ -74,7 +74,7 @@ body {
 .main-content {
   flex: 1;
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 400px 1fr;
   gap: 0;
   overflow: hidden;
 }
@@ -88,10 +88,8 @@ body {
 
 .left-panel {
   overflow-y: auto;
-  overflow-x: visible;
-  width: max-content;
-  min-width: 350px;
-  max-width: 50vw;
+  overflow-x: auto;
+  width: 400px;
 }
 
 .right-panel {

@@ -87,12 +87,25 @@ Playback controls time progression
 - Handles API communication
 - Provides data to all components
 
-**`ZenProcessVisualizer.jsx`** - Main visualization engine
+**`BrutalistCodeCanvas.jsx`** - Main visualization engine (Current)
+- Fixed header with commit progress
+- Three display states: overview, creation, modification
+- Typewriter effect for file creation
+- Line-by-line diff reveal for modifications
+- Brutalist aesthetic: no curves, pure information
+
+**`ZenProcessVisualizer.jsx`** - Alternative visualization (Legacy)
 - Orchestrates playback sequence
 - Manages display modes (overview → creation → modification)
 - Controls animation timing
 
-**`MinimalDirectoryTree.jsx`** - File system visualization
+**`GhostDirectoryTree.jsx`** - File system visualization (Current)
+- Shows "ghost in the machine" effects
+- Auto-expands all directories
+- CREATE/MODIFY badges inline with files
+- Scanning animations and terminal output
+
+**`MinimalDirectoryTree.jsx`** - File system visualization (Legacy)
 - Shows repository structure
 - Animates file additions/modifications
 - Auto-expands directories as files are added
@@ -170,13 +183,17 @@ Animations are carefully orchestrated for smooth visualization:
 git-project-visualizer/
 ├── src/
 │   ├── components/           # React components
-│   │   ├── ZenProcessVisualizer.jsx
-│   │   ├── MinimalDirectoryTree.jsx
+│   │   ├── BrutalistCodeCanvas.jsx    # Current main visualizer
+│   │   ├── GhostDirectoryTree.jsx     # Current directory tree
+│   │   ├── ZenProcessVisualizer.jsx   # Legacy visualizer
+│   │   ├── MinimalDirectoryTree.jsx   # Legacy directory tree
 │   │   ├── MinimalPlaybackControls.jsx
 │   │   └── MinimalRepoSelector.jsx
 │   ├── context/              # State management
 │   │   └── GitDataContext.jsx
 │   ├── styles/               # Component styles
+│   │   ├── BrutalistCodeCanvas.css
+│   │   ├── GhostDirectoryTree.css
 │   │   ├── ZenProcessVisualizer.css
 │   │   ├── minimalist.css
 │   │   └── ...
@@ -184,6 +201,9 @@ git-project-visualizer/
 ├── server.js                 # Express backend
 ├── index.html               # Entry HTML
 ├── vite.config.js           # Vite configuration
+├── ARCHITECTURE.md          # System documentation
+├── BUILD_DIARY.md           # Development log
+├── CLAUDE.md                # AI assistance guide
 └── package.json             # Dependencies
 ```
 

@@ -7,9 +7,8 @@
   background: #000000;
   font-family: var(--font-mono);
   position: relative;
-  overflow: visible;
-  width: max-content;
-  min-width: 350px;
+  overflow: hidden;
+  width: 100%;
 }
 
 .tree-header {
@@ -57,10 +56,8 @@
 .tree-content {
   flex: 1;
   overflow-y: auto;
-  overflow-x: visible;
+  overflow-x: auto;
   padding: 1rem 2rem 1rem 0;
-  width: max-content;
-  min-width: 100%;
   
   /* Subtle scan lines effect */
   position: relative;
